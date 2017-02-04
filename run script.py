@@ -12,9 +12,14 @@ for play in players:
     pnames.append(str(play.replace(' ','+')))
 
 
-
 for player_name in pnames:
+    fname = 'score_files/2011_t20_' + str(player_name) + '.csv'
+    print fname
     print player_name
+    if (os.path.isfile(fname)):
+        print 'file exists'
+        continue
+
     url = 'http://www.bing.com/search?q=cricketarchive.com+player+' + player_name
     print url
     #url  ='http://www.bing.com/search?q=cricketarchive.com+player+ms+dhoni'
@@ -112,6 +117,8 @@ for player_name in pnames:
                         #print tds[2].text
                         #print tds[3].text
     print 'work done for odis, now for t20s'
+
+
 
     page = opener.open(t20_url)
     soup = BeautifulSoup(page.read(),"html.parser")
