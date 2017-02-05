@@ -33,6 +33,7 @@ for player_name in pnames:
     #finding list a and t20 urls
     divs = soup.findAll('div',{'class':'b_attribution'})
     for div in divs:
+        print 'in div bhai'
         print div.text
 
         if str(div.text).find('cricketarchive.com/Archive/Players') != -1 or str(div.text).find('cricketarchive.com/Players')!= -1 :
@@ -41,8 +42,10 @@ for player_name in pnames:
             #__________________MAKE CHANGES SOME HAS ARCHIVE SOME DONT IN URL______________________
             if str(div.text).find('cricketarchive.com/Archive/Players') != -1:
                 types= 1
+		print 'type sorted1'
             else:
                 types = 2
+		print 'type sorted 2'
 
 
 
