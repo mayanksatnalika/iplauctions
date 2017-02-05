@@ -3,6 +3,7 @@ import urllib2
 import pandas as pd
 import numpy as np
 from dateutil import parser
+import os.path
 print 'imported files'
 
 auc2011 = pd.read_csv('2011_auctions.csv')
@@ -10,6 +11,7 @@ pnames= []
 players = auc2011['player_name']
 for play in players:
     pnames.append(str(play.replace(' ','+')))
+
 
 
 for player_name in pnames:
@@ -31,17 +33,35 @@ for player_name in pnames:
     #finding list a and t20 urls
     divs = soup.findAll('div',{'class':'b_attribution'})
     for div in divs:
-        if str(div.text).find('cricketarchive.com/Archive/Players') != -1:
+        print div.text
+
+        if str(div.text).find('cricketarchive.com/Archive/Players') != -1 or str(div.text).find('cricketarchive.com/Players')!= -1 :
+
+
+            #__________________MAKE CHANGES SOME HAS ARCHIVE SOME DONT IN URL______________________
+            if str(div.text).find('cricketarchive.com/Archive/Players') != -1:
+                types= 1
+            else:
+                types = 2
+
+
+
+
 
             print div.text
             s1 = div.text
-            s2 = 'cricketarchive.com/Archive/Players'
+            s2 = 'Players'
             req_str =  s1[s1.index(s2) + len(s2):]
             wrds =  req_str.split('/')
             final_str = wrds[1]+ '/' + wrds[2]
             #print final_str
-            listA_url = str('http://cricketarchive.com/Archive/Players/'+final_str+'/List_A_Matches.html')
-            t20_url =   str('http://cricketarchive.com/Archive/Players/'+final_str+'/Twenty20_Matches.html')
+            if types == 1:
+                listA_url = str('http://cricketarchive.com/Archive/Players/'+final_str+'/List_A_Matches.html')
+                t20_url =   str('http://cricketarchive.com/Archive/Players/'+final_str+'/Twenty20_Matches.html')
+            else:
+
+                listA_url = str('http://cricketarchive.com/Players/'+final_str+'/List_A_Matches.html')
+                t20_url =   str('http://cricketarchive.com/Players/'+final_str+'/Twenty20_Matches.html')
 
             break
     #urls found out
