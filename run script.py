@@ -6,16 +6,16 @@ from dateutil import parser
 import os.path
 print 'imported files'
 
-auc2011 = pd.read_csv('2011_auctions.csv')
+auc2012 = pd.read_csv('2012_auctions.csv')
 pnames= []
-players = auc2011['player_name']
+players = auc2012['player_name']
 for play in players:
     pnames.append(str(play.replace(' ','+')))
 
 
 
 for player_name in pnames:
-    fname = 'score_files/2011_t20_' + str(player_name) + '.csv'
+    fname = 'score_files/2012_t20_' + str(player_name) + '.csv'
     print fname
     print player_name
     if (os.path.isfile(fname)):
@@ -81,8 +81,8 @@ for player_name in pnames:
 
     rows =  table[0].findAll('tr')
     #print rows[0]
-    date_start  = '2010-01-10'
-    date_end  = '2011-01-10'
+    date_start  = '2011-02-04'
+    date_end  = '2012-02-04'
 
     for row in rows:
         tds  = row.findAll('td')
@@ -145,8 +145,8 @@ for player_name in pnames:
     table = soup.findAll('table')
     rows =  table[0].findAll('tr')
     #print rows[0]
-    date_start  = '2010-01-10'
-    date_end  = '2011-01-10'
+    date_start  = '2011-02-04'
+    date_end  = '2012-02-04'
 
     for row in rows:
         tds  = row.findAll('td')
@@ -207,12 +207,12 @@ for player_name in pnames:
     listA['date'] = listA_date
     listA['runs'] = listA_runs
     listA['balls'] = listA_balls
-    fname = 'score_files/2011_listA_' + str(player_name) + '.csv'
+    fname = 'score_files/2012_listA_' + str(player_name) + '.csv'
     listA.to_csv(fname, encoding='utf-8')
 
     t20 = pd.DataFrame()
     t20['date'] = t20_date
     t20['runs'] = t20_runs
     t20['balls'] = t20_balls
-    fname = 'score_files/2011_t20_' + str(player_name) + '.csv'
+    fname = 'score_files/2012_t20_' + str(player_name) + '.csv'
     t20.to_csv(fname, encoding='utf-8')
