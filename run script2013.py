@@ -6,16 +6,16 @@ from dateutil import parser
 import os.path
 print 'imported files'
 
-auc2012 = pd.read_csv('2012_auctions.csv')
+auc2013 = pd.read_csv('2013_auctions.csv')
 pnames= []
-players = auc2012['player_name']
+players = auc2013['player_name']
 for play in players:
     pnames.append(str(play.replace(' ','+')))
 
 
 
 for player_name in pnames:
-    fname = 'score_files/2012_t20_' + str(player_name) + '.csv'
+    fname = 'score_files/2013_t20_' + str(player_name) + '.csv'
     print fname
     print player_name
     if (os.path.isfile(fname)):
@@ -210,12 +210,12 @@ for player_name in pnames:
     listA['date'] = listA_date
     listA['runs'] = listA_runs
     listA['balls'] = listA_balls
-    fname = 'score_files/2012_listA_' + str(player_name) + '.csv'
+    fname = 'score_files/2013_listA_' + str(player_name) + '.csv'
     listA.to_csv(fname, encoding='utf-8')
 
     t20 = pd.DataFrame()
     t20['date'] = t20_date
     t20['runs'] = t20_runs
     t20['balls'] = t20_balls
-    fname = 'score_files/2012_t20_' + str(player_name) + '.csv'
+    fname = 'score_files/2013_t20_' + str(player_name) + '.csv'
     t20.to_csv(fname, encoding='utf-8')
